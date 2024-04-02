@@ -1,12 +1,10 @@
 #ifndef TESTS_H
 #define TESTS_H
 
-#include "vector.h"
+#include "FieldInfo.h"
 #include "complex.h"
 #include "number.h"
-#include "FieldInfo.h"
-
-
+#include "vector.h"
 
 void testIntVector();
 

@@ -2,16 +2,17 @@
 #define COMPLEX_H
 #include "FieldInfo.h"
 
-typedef struct{
+typedef struct
+{
     int Real;
     int Im;
-}Complex;
+} Complex;
 
-void complexSum(void* res, void* a, void* b);
+void complexSum(void *res, void *a, void *b);
 
-void complexMulti(void* res, void* a, void* b);
+void complexMulti(void *res, void *a, void *b);
 
-void complexPrint(void* elem);
+void complexPrint(void *elem);
 
-FieldInfo* CreateComplexFieldInfo();
+FieldInfo *CreateComplexFieldInfo();
 #endif

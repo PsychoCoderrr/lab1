@@ -48,7 +48,7 @@ linker: $(OBJECT_DIR)/main.o $(OBJECT_DIR)/vector.o $(OBJECT_DIR)/complex.o $(OB
 static: 
 	clang --analyze -Xanalyzer -analyzer-output=html *.c $(LIB_DIR)/*.c
 formating:
-	clang-format *.c -i -style=file
+	clang-format *.c $(LIB_DIR)/*.c $(LIB_DIR)/*.h  -i -style=file
 clean:
 	rm -rf $(EXECUTABLE)* *plist $(OBJECT_DIR)/*.o
 help:
