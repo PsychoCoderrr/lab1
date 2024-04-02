@@ -18,7 +18,7 @@ void testIntVector()
     assert(collection.size == 4);
     Vector *vec1 = vectorFindInCollection(&collection, "test1");
     assert(vec1);
-    Vector *vec2 = vectorFindInCollection(&collection, "test1");
+    Vector *vec2 = vectorFindInCollection(&collection, "test2");
     assert(vec2);
 
     int temp1 = 2, temp2 = 3, temp3 = 6, temp4 = 9;
@@ -37,12 +37,12 @@ void testIntVector()
     assert(vec2->size == 2);
     vectorSum(vecResSum, vec1, vec2);
     assert(vecResSum->size == 2);
-    assert(*((int *)(vecResSum->elements + 0)) == 8);
-    assert(*((int *)(vecResSum->elements + 1)) == 12);
+    assert(*((int *)(vecResSum->elements) + 0) == 8);
+    assert(*((int *)(vecResSum->elements) + 1) == 12);
     vectorMulti(vecResMulti, vec1, vec2);
     assert(vecResMulti->size == 2);
-    assert(*((int *)(vecResMulti->elements + 0)) == 12);
-    assert(*((int *)(vecResMulti->elements + 1)) == 27);
+    assert(*((int *)(vecResMulti->elements) + 0) == 12);
+    assert(*((int *)(vecResMulti->elements) + 1) == 27);
     free(IntFieldInfo);
 }
 
@@ -66,7 +66,7 @@ void testComplexVector()
     Complex elem22 = {12, 16};
     Vector *vec1 = vectorFindInCollection(&collection, "test1");
     assert(vec1);
-    Vector *vec2 = vectorFindInCollection(&collection, "test1");
+    Vector *vec2 = vectorFindInCollection(&collection, "test2");
     assert(vec2);
     Vector *vecResSum = vectorFindInCollection(&collection, "resSum");
     assert(vecResSum);
@@ -81,13 +81,13 @@ void testComplexVector()
     vectorAddElement(vec2, &elem22, ComplexFieldInfo);
     assert(vec2->size == 2);
     vectorSum(vecResSum, vec1, vec2);
-    assert(((Complex*)(vecResSum->elements+0))->Real == 12);
-    assert(((Complex*)(vecResSum->elements+0))->Im == 18);
-    assert(((Complex*)(vecResSum->elements+1))->Real == 17);
-    assert(((Complex*)(vecResSum->elements+1))->Im == 22);
+    assert(((Complex *)(vecResSum->elements) + 0)->Real == 12);
+    assert(((Complex *)(vecResSum->elements) + 0)->Im == 18);
+    assert(((Complex *)(vecResSum->elements) + 1)->Real == 17);
+    assert(((Complex *)(vecResSum->elements) + 1)->Im == 22);
     vectorMulti(vecResMulti, vec1, vec2);
-    assert(((Complex*)(vecResMulti->elements+0))->Real == -36);
-    assert(((Complex*)(vecResMulti->elements+0))->Im == 68);
-    assert(((Complex*)(vecResMulti->elements+1))->Real == -36);
-    assert(((Complex*)(vecResMulti->elements+1))->Im == 152);
+    assert(((Complex *)(vecResMulti->elements) + 0)->Real == -36);
+    assert(((Complex *)(vecResMulti->elements) + 0)->Im == 68);
+    assert(((Complex *)(vecResMulti->elements) + 1)->Real == -36);
+    assert(((Complex *)(vecResMulti->elements) + 1)->Im == 152);
 }
