@@ -3,3 +3,4 @@ bin*
 *.swp
 test*
 *.bin
+.DS_Store
