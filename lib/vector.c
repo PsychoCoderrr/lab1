@@ -1,9 +1,8 @@
 #include "vector.h"
+#include "constants.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/* реализация интерфейса для работы с векторами*/
 
 Vector *vectorInit(FieldInfo *typeInfo)
 {
@@ -18,19 +17,19 @@ Vector *vectorInit(FieldInfo *typeInfo)
     return vector;
 }
 
-void vectorAddElement(Vector *v, void *elem, FieldInfo *elemType)
+int vectorAddElement(Vector *v, void *elem, FieldInfo *elemType)
 {
     if (v->typeInfo == elemType)
     {
         v->elements = realloc(v->elements, (v->size + 1) * v->typeInfo->elemSize);
         memcpy((char *)v->elements + v->size * v->typeInfo->elemSize, elem, v->typeInfo->elemSize);
         v->size = v->size + 1;
+        return OK;
     }
     else
     {
-        fprintf(stderr,
-                "Ошибка несоответствия типов"); // либо callback либо глобальный флаг ошибок(скрытый внутри библиотеки)
-        return;
+        fprintf(stderr, "Ошибка несоответствия типов");
+        return BAD_TYPE;
     }
 }
 
@@ -42,7 +41,7 @@ void vectorFree(Vector *v)
     free(v);
 }
 
-void vectorSum(Vector *res, const Vector *v1, const Vector *v2)
+int vectorSum(Vector *res, const Vector *v1, const Vector *v2)
 {
     if (v1->size == v2->size && v1->typeInfo == v2->typeInfo)
     {
@@ -51,7 +50,7 @@ void vectorSum(Vector *res, const Vector *v1, const Vector *v2)
         if (intermediateResult == NULL)
         {
             fprintf(stderr, "Ошибка выделения памяти");
-            return;
+            return BAD_MEMORY;
         }
         for (int elemNumber = 0; elemNumber < v1->size; elemNumber++)
         {
@@ -64,13 +63,20 @@ void vectorSum(Vector *res, const Vector *v1, const Vector *v2)
         }
         free(intermediateResult);
     }
-    else
+    else if (v1->size != v2->size)
     {
-        printf("Ошибка несоотвеетсвия размеров векторов, размеров элементов вектора");
+        fprintf(stderr, "Ошибка несоотвеетсвия размеров векторов");
+        return BAD_SIZE;
     }
+    else if (v1->typeInfo != v2->typeInfo)
+    {
+        fprintf(stderr, "Ошибка несоотвеетсвия типов вектора");
+        return BAD_TYPE;
+    }
+    return OK;
 }
 
-void vectorMulti(Vector *res, const Vector *v1, const Vector *v2)
+int vectorMulti(Vector *res, const Vector *v1, const Vector *v2)
 {
     if (v1->size == v2->size && v1->typeInfo == v2->typeInfo)
     {
@@ -79,7 +85,7 @@ void vectorMulti(Vector *res, const Vector *v1, const Vector *v2)
         if (intermediateResult == NULL)
         {
             fprintf(stderr, "Ошибка выделения памяти");
-            return;
+            return BAD_MEMORY;
         }
         for (int elemNumber = 0; elemNumber < v1->size; elemNumber++)
         {
@@ -92,6 +98,17 @@ void vectorMulti(Vector *res, const Vector *v1, const Vector *v2)
         }
         free(intermediateResult);
     }
+    else if (v1->size != v2->size)
+    {
+        fprintf(stderr, "Ошибка несоотвеетсвия размеров векторов");
+        return BAD_SIZE;
+    }
+    else if (v1->typeInfo != v2->typeInfo)
+    {
+        fprintf(stderr, "Ошибка несоотвеетсвия типов вектора");
+        return BAD_TYPE;
+    }
+    return OK;
 }
 
 void vectorPrint(Vector *v)
@@ -109,7 +126,7 @@ void vectorAddToCollection(VectorCollection *collection, char *name, FieldInfo *
     collection->vectors =
         realloc(collection->vectors, (collection->size + 1) * sizeof(NamedVector)); /*(лучше сделать другой шаг)*/
     NamedVector *newVec = &(collection->vectors[collection->size]);
-    strncpy(newVec->name, name, sizeof(newVec->name));
+    newVec->name = name;
     newVec->vector = vectorInit(VectorInfo);
     collection->size += 1;
 }

@@ -14,7 +14,7 @@ typedef struct _vector
 
 typedef struct _namedVector
 {
-    char* name;
+    char *name;
     Vector *vector;
 } NamedVector;
 
@@ -26,13 +26,13 @@ typedef struct _vectorCollection
 
 Vector *vectorInit(FieldInfo *typeInfo);
 
-void vectorAddElement(Vector *v, void *elem, FieldInfo *elemType);
+int vectorAddElement(Vector *v, void *elem, FieldInfo *elemType);
 
 void vectorFree(Vector *v);
 
-void vectorSum(Vector *res, const Vector *v1, const Vector *v2);
+int vectorSum(Vector *res, const Vector *v1, const Vector *v2);
 
-void vectorMulti(Vector *res, const Vector *v1, const Vector *v2);
+int vectorMulti(Vector *res, const Vector *v1, const Vector *v2);
 
 void vectorPrint(Vector *v);
 

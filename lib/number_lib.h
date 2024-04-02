@@ -7,4 +7,3 @@ void numberMulti(void *res, void *a, void *b);
 
 void numberPrint(void *elem);
 #endif
-

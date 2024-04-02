@@ -1,5 +1,6 @@
 #include "lib/FieldInfo.h"
 #include "lib/complex.h"
+#include "lib/constants.h"
 #include "lib/number.h"
 #include "lib/tests.h"
 #include "lib/vector.h"
@@ -55,7 +56,6 @@ int main()
                 return 0;
             }
             vectorAddToCollection(&collection, name, IntFieldInfo);
-            free(name);
             break;
 
         case 1:
@@ -65,7 +65,6 @@ int main()
                 return 0;
             }
             vectorAddToCollection(&collection, name, ComplexFieldInfo);
-            free(name);
             break;
 
         case 2:
@@ -129,6 +128,7 @@ int main()
             else
             {
                 vecRes->size = 0;
+                free(name3);
             }
 
             vec1 = vectorFindInCollection(&collection, name);
@@ -138,13 +138,19 @@ int main()
                 fprintf(stderr, "Какой-то из векторов не найден\n");
                 free(name);
                 free(name2);
-                free(name3);
                 break;
             }
-            vectorSum(vecRes, vec1, vec2);
+            switch (vectorSum(vecRes, vec1, vec2))
+            {
+            case BAD_MEMORY:
+            case BAD_TYPE:
+            case BAD_SIZE:
+                free(name);
+                free(name2);
+                continue;
+            }
             free(name);
             free(name2);
-            free(name3);
             break;
 
         case 5:
@@ -168,6 +174,7 @@ int main()
             else
             {
                 vecRes->size = 0;
+                free(name3);
             }
 
             vec1 = vectorFindInCollection(&collection, name);
@@ -177,13 +184,19 @@ int main()
                 fprintf(stderr, "Какой-то из векторов не найден\n");
                 free(name);
                 free(name2);
-                free(name3);
                 break;
             }
-            vectorMulti(vecRes, vec1, vec2);
+            switch (vectorMulti(vecRes, vec1, vec2))
+            {
+            case BAD_MEMORY:
+            case BAD_TYPE:
+            case BAD_SIZE:
+                free(name);
+                free(name2);
+                continue;
+            }
             free(name);
             free(name2);
-            free(name3);
             break;
 
         case 6:
@@ -193,14 +206,13 @@ int main()
                 return 0;
             }
             vec = vectorFindInCollection(&collection, name);
+            free(name);
             if (vec == NULL)
             {
                 fprintf(stderr, "Какой-то из векторов не найден\n");
-                free(name);
                 break;
             }
             vectorPrint(vec);
-            free(name);
             break;
 
         case 7:
@@ -222,6 +234,7 @@ int main()
 
     for (int i = 0; i < collection.size; i++)
     {
+        free((collection.vectors[i]).name);
         vectorFree((collection.vectors[i]).vector);
     }
     return 0;
