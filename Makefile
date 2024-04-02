@@ -28,10 +28,10 @@ $(OBJECT_DIR)/main.o: main.c $(LIB_DIR)/FieldInfo.h
 $(OBJECT_DIR)/vector.o: $(LIB_DIR)/vector.c $(LIB_DIR)/vector.h $(LIB_DIR)/FieldInfo.h
 	$(CC) -c $< -o $@ $(SAN) $(CFLAGS) $(OPTIM)
 
-$(OBJECT_DIR)/complex.o: $(LIB_DIR)/complex.c $(LIB_DIR)/complex.h $(LIB_DIR)/FieldInfo.h
+$(OBJECT_DIR)/complex.o: $(LIB_DIR)/complex.c $(LIB_DIR)/complex.h $(LIB_DIR)/FieldInfo.h $(LIB_DIR)/complex_lib.h
 	$(CC) -c $< -o $@ $(SAN) $(CFLAGS) $(OPTIM)
 
-$(OBJECT_DIR)/number.o: $(LIB_DIR)/number.c $(LIB_DIR)/number.h $(LIB_DIR)/FieldInfo.h
+$(OBJECT_DIR)/number.o: $(LIB_DIR)/number.c $(LIB_DIR)/number.h $(LIB_DIR)/number_lib.h $(LIB_DIR)/FieldInfo.h
 	$(CC) -c $< -o $@ $(SAN) $(CFLAGS) $(OPTIM)
 
 $(OBJECT_DIR)/tests.o: $(LIB_DIR)/tests.c $(LIB_DIR)/tests.h $(LIB_DIR)/FieldInfo.h

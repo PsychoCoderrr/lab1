@@ -1,7 +1,7 @@
 #include "number.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "number_lib.h"
 void numberSum(void *res, void *a, void *b)
 {
     *(int *)res = *(int *)a + *(int *)b;
