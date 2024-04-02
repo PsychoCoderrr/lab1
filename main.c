@@ -10,8 +10,8 @@
 
 int main()
 {
-    //    testIntVector();
-    //    testComplexVector();
+    testIntVector();
+    testComplexVector();
     VectorCollection collection = {NULL, 0};
     FieldInfo *IntFieldInfo = CreateIntFieldInfo();
     if (IntFieldInfo == NULL)

@@ -42,7 +42,7 @@ preparation:
 	mkdir -p $(LIB_DIR)
 	mkdir -p $(OBJECT_DIR)
 
-linker: $(OBJECT_DIR)/main.o $(OBJECT_DIR)/vector.o $(OBJECT_DIR)/complex.o $(OBJECT_DIR)/number.o
+linker: $(OBJECT_DIR)/main.o $(OBJECT_DIR)/vector.o $(OBJECT_DIR)/complex.o $(OBJECT_DIR)/number.o $(OBJECT_DIR)/tests.o
 	$(CC) $? -o $(EXECUTABLE) $(SAN) $(LDFLAGS) $(OPTIM)
 
 static: 
