@@ -14,7 +14,7 @@ typedef struct _vector
 
 typedef struct _namedVector
 {
-    char name[20]; // через readline
+    char* name;
     Vector *vector;
 } NamedVector;
 

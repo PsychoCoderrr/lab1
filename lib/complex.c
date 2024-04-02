@@ -27,7 +27,6 @@ FieldInfo *CreateComplexFieldInfo()
     {
         return NULL;
     }
-    COMPLEX_FIELD_INFO->typeName = "complex"; /*(отказаться от тайп нейм или реализовать через стрингкопи)*/
     COMPLEX_FIELD_INFO->elemSize = sizeof(Complex);
     COMPLEX_FIELD_INFO->SumElements = &complexSum;
     COMPLEX_FIELD_INFO->MultiElements = &complexMulti;

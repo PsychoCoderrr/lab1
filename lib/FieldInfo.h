@@ -9,7 +9,6 @@ typedef void (*MultiVector)(void *result, void *a, void *b);
 
 typedef struct FieldInfo
 {
-    char *typeName;
     int elemSize;
     SumVector SumElements;
     MultiVector MultiElements;

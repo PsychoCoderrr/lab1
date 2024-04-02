@@ -25,7 +25,6 @@ FieldInfo *CreateIntFieldInfo()
     {
         return NULL;
     }
-    INT_FIELD_INFO->typeName = "int";
     INT_FIELD_INFO->elemSize = sizeof(int);
     INT_FIELD_INFO->SumElements = &numberSum;
     INT_FIELD_INFO->MultiElements = &numberMulti;

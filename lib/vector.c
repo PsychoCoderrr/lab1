@@ -90,6 +90,7 @@ void vectorMulti(Vector *res, const Vector *v1, const Vector *v2)
 
             vectorAddElement(res, intermediateResult, v1->typeInfo);
         }
+        free(intermediateResult);
     }
 }
 
